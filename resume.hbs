@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="https://antfu.me/favicon.svg" type="image/svg+xml">
-    <link rel="icon" href="https://antfu.me/favicon.png" type="image/png">
+      <link rel="icon" href="/assets/favicon.ico" type="image/svg+xml">
+      <link rel="icon" href="/assets/favicon.ico" type="image/png">
     <title>{{#resume.basics}}{{name}}{{/resume.basics}} - Résumé</title>
     <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
       <script
@@ -72,15 +72,15 @@
                     <!--<span class="social-link-text print-only">{{username}}</span>-->
                   </a>
                 {{/profiles}}
-
-                  <div class="social-links" id="themeIcon">
-                      <button type="button"  id="theme_toggler" class="btn btn-secondary">
-                          <i class="bi"></i>
-                          <span id="theme_toggler_text" class="visually-hidden">Dark Mode</span>
-                      </button>
-                  </div>
-
               </div>
+                {{#if supportDarkMode}}
+                <div class="social-links" id="themeIcon">
+                    <button type="button"  id="theme_toggler" class="btn btn-secondary">
+                        <i class="bi"></i>
+                        <span id="theme_toggler_text" class="visually-hidden">Dark Mode</span>
+                    </button>
+                </div>
+                {{/if}}
             </div>
           </div>
           {{/resume.basics}}
@@ -348,17 +348,19 @@
       }
       window.addEventListener('load', updateStars)
 
-      updateTogglerText();
-
+    {{#if resume.basics.supportDarkMode}}
+      //page_load
       if(localStorage.getItem('theme')){
+          document.getElementById('theme_toggler_text').innerHTML = 'Light Mode';
           document.body.classList.toggle('dark-mode');
           $('#themeIcon').find("i").toggleClass("bi-sun");
       }
       else{
+          document.getElementById('theme_toggler_text').innerHTML = 'Dark Mode';
           $('#themeIcon').find("i").toggleClass("bi-moon");
       }
 
-
+      //listen to click event
       let theme_toggler = document.querySelector('#theme_toggler');
 
       theme_toggler.addEventListener('click', function(){
@@ -382,6 +384,7 @@
               document.getElementById('theme_toggler_text').innerHTML = 'Dark Mode';
           }
       }
+      {{/if}}
     </script>
   </body>
 </html>
