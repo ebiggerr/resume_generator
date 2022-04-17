@@ -4,7 +4,9 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "concurrently \"npx grunt watch\" \"node ./serve.js ./resume.json\"",
-    "build": "grunt less && node ./build.js"
+    "build": "grunt less && node ./build.js",
+    "testing_build_deploy": "grunt less && node ./build_deploy.js",
+    "build_deploy": "grunt less && node ./build_deploy.js && cd ebiggerr.github.io && git checkout v2 && git add index.html && git commit --amend -m \"Automated from npm scripts.\" && git push origin v2"
   },
   "dependencies": {
     "gravatar": "^1.8.1",
