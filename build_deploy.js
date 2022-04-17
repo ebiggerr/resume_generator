@@ -38,7 +38,7 @@ async function buildHTML() {
 }
 
 async function commitAndPushToRemote(html) {
-    console.log('Committed and Pushing to origin/v2 if you use the npm run build_deploy')
+    console.log('Committed and Pushing to origin/master if you use the npm run build_deploy')
     console.log('Done')
 }
 
