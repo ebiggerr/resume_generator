@@ -6,7 +6,7 @@
     "dev": "concurrently \"npx grunt watch\" \"node ./serve.js ./resume.json\"",
     "build": "grunt less && node ./build.js",
     "testing_build_deploy": "grunt less && node ./build_deploy.js",
-    "build_deploy": "grunt less && node ./build_deploy.js && cd ebiggerr.github.io && git checkout master && git add index.html && git commit --amend -m \"Automated from npm scripts.\" && git push origin master"
+    "build_deploy": "grunt less && node ./build_deploy.js && cd ebiggerr.github.io && git checkout master && git pull --ff-only && git add index.html && git commit --amend -m \"Automated from npm scripts.\" && git push origin master"
   },
   "dependencies": {
     "gravatar": "^1.8.1",
