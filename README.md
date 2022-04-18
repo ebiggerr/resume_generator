@@ -43,3 +43,10 @@ npm run build
 5. View the result
     - Index.html (`resume_generator/dist/index.html`)
     - resume.pdf (`resume_generator/dist/resume.pdf`)
+
+
+## Custom behaviour
+
+1. Dark theme/mode
+2. Parse markdown link from `resume.json` to html hyperlink
+3. `npm run build_deploy`
