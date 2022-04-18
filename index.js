@@ -227,12 +227,31 @@ async function render(resume) {
   Handlebars.registerHelper('breaklines', function(text) {
     text = Handlebars.Utils.escapeExpression(text);
     text = text.replace(/(\r\n|\n|\r)/gm, '<br>');
+    text = parseMarkDownLink(text)
     return new Handlebars.SafeString(text);
   })
 
   Handlebars.registerHelper('getBuildDate', function() {
     return moment().format('MMMM Do YYYY, h:mm:ss a')
   })
+
+  Handlebars.registerHelper('parseMarkDownLink', function(text){
+    text = parseMarkDownLink(text)
+    return new Handlebars.SafeString(text);
+  })
+
+  function parseMarkDownLink(input) {
+    let matches = input.match(/\[(.+)\]\((http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)\)/g);
+
+    if( matches != null && matches.length > 0){
+      for(m of matches){
+        let text = m.match(/\[(.*?)\]/)[1];//get only the txt
+        let url = m.match(/\((.*?)\)/)[1];//get only the link
+        input = input.replace(m,'<a href="'+url+'" target="_blank">'+text+'</a>')
+      }
+    }
+    return input
+  }
 
   return Handlebars.compile(template)({
     css: css,
